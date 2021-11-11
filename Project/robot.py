@@ -1,2 +1,6 @@
 class Robots:
-    pass
+    def __init__(self, name):
+        pass
+
+    def attack(self, dinosaur):
+        pass
