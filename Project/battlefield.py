@@ -3,8 +3,8 @@ from herd import Herd
 
 class Battlefield:
     def __init__(self):
-        self.fleet = Fleet
-        self.herd = Herd
+        self.fleet = Fleet()    
+        self.herd = Herd()
 
     def run_game(self): #void
         pass
@@ -21,10 +21,10 @@ class Battlefield:
     def robo_turn(self, robot): #void
         pass
 
-    def show_doo(self): #void
+    def show_doo(self): #void doo=dino opponent options
         pass
 
-    def show_roo(self): #void
+    def show_roo(self): #void roo=robo opponent options
         pass
 
     def display_winners(self): #void

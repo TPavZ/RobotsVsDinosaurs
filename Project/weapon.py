@@ -1,5 +1,5 @@
-class Weapons:
-    def __init__(self, name, attack_power):
+class Weapon:
+    def __init__(self, name, weapon_attack_power): #name a weapon and choose the number of damage it will subtract.
         self.wn = name #string
-        self.ap = attack_power #int
+        self.wap = weapon_attack_power #int
         #wn = weapon name & ap = attack power
