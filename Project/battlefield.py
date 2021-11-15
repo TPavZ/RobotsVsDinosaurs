@@ -1,4 +1,3 @@
-from dinosaur import Dinosaur
 from fleet import Fleet
 from herd import Herd
 #import random
@@ -13,8 +12,6 @@ class Battlefield:
         if start_game == True:
             print("\nLets get ready to RUMBLE!!!\nRobots have been granted first attack.\n") #need to initialize the battle here.
             #*** need to initialize the battle here, collect fighters, battle, then end battle.
-            self.herd.create_herd()
-            self.fleet.create_fleet()
             self.battle()
             #self.display_winners() #STOP, Battle is over
         else:
@@ -36,17 +33,19 @@ class Battlefield:
         #   back to the selection.
         #once all the fights on one team have been eliminated, the fight is over and the remaining team wins.
         #take and display options (from below) to choose a fighter to use.
-        while len(self.herd.dinosaurs) > 0 and len(self.fleet.robots) > 0:
+        self.herd.create_herd()
+        self.fleet.create_fleet()
+        while len(self.herd.dinosaurs) > 0 and len(self.fleet.robots) > 0: #changed from and to or, no change
             self.robo_turn()
-            self.dino_turn()            
-        #if len(self.herd.dinosaurs) == 0 or len(self.fleet.robots) == 0: #STOP, Battle is over
-            #self.display_winners()
-                
+            if len(self.herd.dinosaurs) > 0:         # if  executes 
+                self.dino_turn()
+
+        self.display_winners()
+            #len(self.herd.dinosaurs) == 0 or len(self.fleet.robots) == 0:
             
             
-            
-            
-        #need to .pop dead competetors out of the lists
+#STOP, Battle is over
+#need to .remove dead competetors out of the lists
 
     def dino_turn(self): #void Make the dino attack
         #take a dino of choice
@@ -57,11 +56,15 @@ class Battlefield:
         #move = robot[index of selection] health - dino[index of selection] attack damage.
         #take dino of selection then attack damage is subtracted from the robo health.
         #take robot index one and subrtract dino index one attack damage.
+        print("Here are your avaliable attackers: ")
         self.show_doo()
-        dino_selection = int(input("choose a Dinosaur to attack with. [0, 1, or 2]:"))
+        dino_selection = int(input("\nChoose a Dinosaur to attack with. [0, 1, or 2]: "))
+        print(f"\n{self.herd.dinosaurs[dino_selection].name} Has been selected to make an attack")
+        print("\nAvailable robot opponents to attack: ")
         self.show_roo()
-        robo_selection = int(input("choose a Robot to attack. [0, 1, or 2]:"))
+        robo_selection = int(input("\nChoose a Robot to attack. [0, 1, or 2]: "))
         self.herd.dinosaurs[dino_selection].dino_attack(self.fleet.robots[robo_selection])
+        print(f"\n{self.herd.dinosaurs[dino_selection].name} attacks {self.fleet.robots[robo_selection].name}\n")
         if self.fleet.robots[robo_selection].health <= 0:
             self.fleet.robots.remove(self.fleet.robots[robo_selection])
         #if len(self.fleet.robots) == 0:
@@ -74,15 +77,19 @@ class Battlefield:
         #take a bot of choice
         #have the bot attack dino
         #use attack damage to subtract health from dino
+        print("Here are your avaliable attackers: ")
         self.show_roo()
-        dino_selection = int(input("choose a Robot to attack with. [0, 1, or 2]:"))
+        robo_selection = int(input("\nChoose a Robot to attack with. [0, 1, or 2]: "))
+        print(f"\n{self.fleet.robots[robo_selection].name} Has been selected to make an attack")
+        print("\nAvailable dinosaur opponents to attack: ")
         self.show_doo()
-        robo_selection = int(input("choose a Dinosaur to attack. [0, 1, or 2]:"))
+        dino_selection = int(input("\nChoose a Dinosaur to attack. [0, 1, or 2]: "))
+        print(f"\n{self.fleet.robots[robo_selection].name} attacks {self.herd.dinosaurs[dino_selection].name}\n")
         self.fleet.robots[robo_selection].bot_attack(self.herd.dinosaurs[dino_selection])
         if self.herd.dinosaurs[dino_selection].health <= 0:
             self.herd.dinosaurs.remove(self.herd.dinosaurs[dino_selection])
         #if len(self.herd.dinosaurs) == 0:
-            #self.display_winners()
+            
 
     def show_doo(self): #void doo=dino opponent options, print each bot in fleet name and health
         index = 0
