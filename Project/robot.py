@@ -2,14 +2,16 @@ from weapon import Weapon
 
 
 class Robot:
-    def __init__(self, name, health, Weapon):
+    def __init__(self, name):
         self.name = name
-        self.health = health
-        self.weapon = Weapon
-        pass
+        self.health = 100
+        self.weapon = Weapon("Gun", 50)
+        
 
     def bot_attack(self, dinosaur): #void - use attack power to damage oponent(dino). return health post attack = "pa"
-       pa_dino_health = dinosaur.health - self.wap.attack_power #dino health - weapon damage number
-       return pa_dino_health
-
-    #this makes is what makes  sense to me will it work? not sure.
+       dinosaur.health -= self.weapon.wap
+       return dinosaur.health
+ 
+#wall_e = Robot("WALL-E", 50, Weapon("Compactor", 30)) #weapon pinch
+#droideka = Robot("Droideka", 100, Weapon("Rapid Fire canons", 45)) 
+#c12 = Robot("C12", 100, Weapon("Missile Storm", 55))

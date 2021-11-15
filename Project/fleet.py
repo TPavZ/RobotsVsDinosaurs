@@ -6,10 +6,9 @@ class Fleet:
         self.robots = []
 
     def create_fleet(self): #void name of bots = Robot(name, health, weapon) and weapon from Weapon(name, power)
-        wall_e = Robot("WALL-E", 50, Weapon("Compactor", 30)) #weapon pinch
-        droideka = Robot("Droideka", 100, Weapon("Rapid Fire canons", 45)) 
-        c12 = Robot("C12", 100, Weapon("Missile Storm", 55))
+        wall_e = Robot("WALL-E")
+        droideka = Robot("Droideka")
+        c12 = Robot("C12")
         self.robots.append(wall_e)
         self.robots.append(droideka)
         self.robots.append(c12)
-
